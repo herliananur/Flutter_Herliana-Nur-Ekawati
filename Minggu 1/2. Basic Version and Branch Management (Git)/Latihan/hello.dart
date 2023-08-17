@@ -1,3 +1,3 @@
 void main() {
-  print("Hello featureA!");
+  print("Hello from feature A and Greetings from feature B!");
 }
