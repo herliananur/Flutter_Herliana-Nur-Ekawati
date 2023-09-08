@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './list_kontak.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,8 +22,25 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: const Center(
-        child: Text('this is MaterialApp'),
+      body: ListView.builder(
+        itemCount: daftarKontak.length,
+        itemBuilder: (context, index) {
+          final contact = daftarKontak[index];
+          final firstLetter = contact.name[0];
+          return ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.green,
+              child: Text(
+                firstLetter,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            title: Text(contact.name),
+            subtitle: Text(contact.number),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

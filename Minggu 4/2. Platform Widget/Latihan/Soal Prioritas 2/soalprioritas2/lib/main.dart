@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'material_app.dart';
+import 'package:flutter/cupertino.dart';
+import './cupertino_app.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
