@@ -8,6 +8,7 @@ class FlutterForm extends StatefulWidget {
 }
 
 class _FlutterFormState extends State<FlutterForm> {
+  //property
   var inputController = TextEditingController();
   var formkey = GlobalKey<FormState>();
   var radioValue = '';
@@ -32,7 +33,7 @@ class _FlutterFormState extends State<FlutterForm> {
         key: formkey,
         child: Column(
           children: [
-            TextField(
+            TextField( //build
               controller: inputController,
             ),
 
