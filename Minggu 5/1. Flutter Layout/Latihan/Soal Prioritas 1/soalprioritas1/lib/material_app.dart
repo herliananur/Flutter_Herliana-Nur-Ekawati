@@ -14,23 +14,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class ListContact {
-  final String name;
-  final String number;
-
-  ListContact({
-    required this.name,
-    required this.number,
-  });
-}
-
-List<ListContact> daftarkontak = [
-  ListContact(name: 'Leanne Graham', number: '1-770-736-8031 x56442'),
-  ListContact(name: 'Leanne Graham', number: '1-770-736-8031 x56442'),
-  ListContact(name: 'Leanne Graham', number: '1-770-736-8031 x56442'),
-  ListContact(name: 'Leanne Graham', number: '1-770-736-8031 x56442'),
-  ListContact(name: 'Leanne Graham', number: '1-770-736-8031 x56442'),
-  ListContact(name: 'Leanne Graham', number: '1-770-736-8031 x56442'),
-  ListContact(name: 'Leanne Graham', number: '1-770-736-8031 x56442'),
-];
