@@ -45,7 +45,7 @@ Ada 2 jenis Layout:
    - Memiliki kemampuan scroll
 
     Macam-macam ListView
-  - ListView adalah jenis ListView paling dasar yang digunakan untuk menampilkan daftar item dalam daftar list secara vertikal
+     - ListView adalah jenis ListView paling dasar yang digunakan untuk menampilkan daftar item dalam daftar list secara vertikal
     ```sh
     @override
     Widget build(BuildContext context) {
@@ -61,10 +61,10 @@ Ada 2 jenis Layout:
       ),ListTile(
         title: Text(
           'Item 3',),),]);}
+    ```
+     - ListView.builder
 
-  - ListView.builder
-
-    Digunakan ketika Anda memiliki daftar item yang panjang atau dinamis.
+       Digunakan ketika Anda memiliki daftar item yang panjang atau dinamis.
     ```sh
     @override
     Widget build(BuildContext context) {
@@ -72,15 +72,12 @@ Ada 2 jenis Layout:
       ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return Text('$index');
-        },
-      )
-    ]);
-    }
+          return Text('$index');},)]);}
+    ```
 
-  - ListView.separated
+     - ListView.separated
 
-    Digunakan untuk menambahkan pemisah setiap item dalam daftar
+       Digunakan untuk menambahkan pemisah setiap item dalam daftar
     ```sh
     @override
     Widget build(BuildContext context) {
@@ -89,10 +86,11 @@ Ada 2 jenis Layout:
       separatorBuilder: (context, index) => const Divider(), 
       itemBuilder: (context, index) {
       return ListTile(title: Text(items[index]),);},);}}
+    ```
     
-  - ListView.custom
+     - ListView.custom
 
-    Memberikan lebih banyak kontrol atas cara item ditampilkan dalam daftar. Cocok untuk kasus yang kompleks di mana ingin menyesuaikan tata letak item.
+       Memberikan lebih banyak kontrol atas cara item ditampilkan dalam daftar. Cocok untuk kasus yang kompleks di mana ingin menyesuaikan tata letak item.
     ```sh
     @override
     Widget build(BuildContext context) {
@@ -103,9 +101,9 @@ Ada 2 jenis Layout:
             items[index],),)));}
     ```
 
-    Kapan menggunakan ListView?
+      Kapan menggunakan ListView?
 
-    ListView:
+   ListView:
     - Cocok untuk daftar dengan sedikit item
     - Semua item dimuat ke dalam widget tree sekaligus, yang dapat mempengaruhi perfoma jika daftar sangat besar
     
@@ -121,5 +119,57 @@ Ada 2 jenis Layout:
     - Memberi anda lebih banyak kontrol atas tata letak item dan pemrosesan tampilan item
     - Cocok untuk tampilan yang kompleks, tetapi perlu dikelola dengan hati-hati agar tidak mengorbankan performa
     
-   **GridView**
-   - Mengatur widgets dalam bentuk galeri
+    **GridView**
+      - Mengatur widgets dalam bentuk galeri
+     
+      Macam-macam GridView
+     - GridView.count
+
+       Memungkinkan untuk membuat tampilan berbasis grid dengan jumlah baris dan kolom yang tetap. Dapat dikontrol jumlah baris dan kolom dengan parameter crossAxisCount
+    ```sh
+     @override
+    Widget build(BuildContext context) {
+    return Scaffold(
+      body: GridView.count(
+        crossAxisCount: 2, 
+        children: List.generate(10, 
+        (index) => Image.network('', fit: BoxFit.cover,)),));}
+    ```
+ 
+     - GridView.builder
+
+       Digunakan ketika memiliki daftar item yang panjang atau dinamis yang ingin ditampilkan dalam tampilan berbasis grid. Ini membangun item hanya saat diperlukan, yang efisien
+    ```sh
+    @override
+    Widget build(BuildContext context) {
+    return Scaffold(
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2), 
+          itemBuilder: BuildContext context, int index){
+            return const GridTile(child: Text('AA'));});}
+     
+  - GridView.extent
+
+    Memungkinkan untuk membuat tampilan berbasis grid dengan item yang memiliki lebar atau tinggi yang tetap. Dapat mengontrol ukuran lebar atau tinggi item dengan parameter maxCrossAxisExtent
+    ```sh
+    @override
+    Widget build(BuildContext context) {
+    return Scaffold(
+      body: GridView.extent(
+        maxCrossAxisExtent: 150, 
+        children: List.generate(10, (index) => Image.network('', fit: BoxFit.cover,)),));}
+         
+  - GridView.custom
+
+    Memberi lebih banyak kontrol atas cara item ditampilkan dalam tampilan berbasis grid. Cocok untuk kasus yang kompleks di mana ingin menyesuaikan tata letak item
+    ```sh
+    @override
+    Widget build(BuildContext context) {
+    return Scaffold(
+      body: GridView.custom(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 150), 
+          childrenDelegate: SliverChildBuilderDelegate(
+            (context, index) => 
+            return Text('aaaaa'))));}
