@@ -202,3 +202,66 @@ Beberapa poin penting pada materi Advance Form Flutter sebagai berikut:
         _openFile(file);
       }
      ```
+
+4. Image Picker
+   - Kemampuan widget untuk mengakses kamera
+   - Kemampuan widget untuk mengambil foto dari galeri perangkat
+
+   Cara Membuat Image Picker
+   - Menggunakan packages image_picker
+   - Menambahkan packages image_picker di pubspec.yaml
+     ```sh
+     dependencies:
+       flutter:
+          sdk: flutter
+       image_picker: ^1.0.4
+     ```
+   - Import packages image_picker dalam file dart
+     ```sh
+     import 'package:image_picker/image_picker.dart';
+     ```
+   - Example
+     ```sh
+     final ImagePicker picker = ImagePicker();
+     // Pick an image.
+     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+     // Capture a photo.
+     final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+     // Pick a video.
+     final XFile? galleryVideo =
+        await picker.pickVideo(source: ImageSource.gallery);
+     // Capture a video.
+     final XFile? cameraVideo = await picker.pickVideo(source: ImageSource.camera);
+     // Pick multiple images.
+     final List<XFile> images = await picker.pickMultiImage();
+     // Pick singe image or video.
+     final XFile? media = await picker.pickMedia();
+     // Pick multiple images and videos.
+     final List<XFile> medias = await picker.pickMultipleMedia();
+     ```
+   - Membuat variable untuk menampung gambar
+     ```sh
+     class _ImagePageState extends State<ImagePage>{
+        XFile? xFile;
+     ```
+   - Membuat widget dengan memberikan kondisi apabila variable xFile yang telah dibuat, seperti ini karena xFile belum ada nilai atau tidak ada interaksi
+     ```sh
+     xFile != null
+          ? Image.file(
+              File(
+                 xFile!.path),)
+          : const Icon(
+              Icons.image,
+              size: 240),
+     ```
+   - Buat fungsi untuk mengambil galeri
+     ```sh
+     void pickGallery() sync {
+        final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+        if (image != null) {
+           xFile = image;
+           setState(() {});
+        }
+     }
+     ```
