@@ -187,6 +187,7 @@ class _ContactPageState extends State<ContactPage> {
                             updateContact(selectIndexContact);
                           }
                           prinContactData();
+                          _isFormValid = false;
                           setState(() {});
                           // print(_nameValue);
                         }
