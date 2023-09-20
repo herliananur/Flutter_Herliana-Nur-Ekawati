@@ -223,8 +223,14 @@ class _ContactPageState extends State<ContactPage> {
                   shrinkWrap: true,
                   children: [
                     ListTile(
-                      leading: const CircleAvatar(
-                        child: Text('A'),
+                      leading: CircleAvatar(
+                        backgroundColor:
+                            ThemeColor().m3SysLightPrimaryContainer,
+                        child: Text(
+                          data.name[0],
+                          style: TextStyle(
+                              color: ThemeColor().m3SysLightonPrimaryContainer),
+                        ),
                       ),
                       title: Text(data.name),
                       subtitle: Text(data.number),

@@ -12,4 +12,5 @@ class ThemeColor {
   Color m3SysLightSecondary = const Color(0XFF625B71);
   Color m3SysLightOutlineVariant = const Color(0XFFCAC4D0);
   Color m3SysLightSurface = const Color(0XFFFFFBFE);
+  Color m3SysLightPrimaryContainer = const Color(0XFFEADDFF);
 }
