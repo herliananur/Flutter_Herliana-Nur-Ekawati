@@ -16,7 +16,8 @@
 
 ## Soal Prioritas 2
 
-1. Tambahkan date, color, dan file picker pada bagian berikut 
+1. Tambahkan date, color, dan file picker pada bagian berikut
+    
    ![soalprioritas2](soalprioritas2.1.png)
 
 2. Ketika button submit ditekan akan memasukkan data name, nomor, date, color dan name  file ke dalam variabel yang telah kalian buat. 
