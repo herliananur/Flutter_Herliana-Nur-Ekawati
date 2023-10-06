@@ -105,3 +105,60 @@ Beberapa poin penting dalam materi Flutter State Management (Provider) sebagai b
        );
      }
    );
+
+3. Deskripsi
+   Class yang perlu diperhatikan dalam penggunaan provider, yaitu:
+   - Dari Package Provider
+        - ChangeNotifierProvider
+        - MultiProvider
+        - Consumer
+   - Built In class dari Flutter SDK
+        - ChangeNotifier
+
+4. ChangeNotifier
+   - Class yang menambahkan dan menghapus listeners
+   - Digunakan dengan cara meng-extends
+   - Memanggil notifyListeners(), fungsi yang memberitahu widget yang menggunakan state bahwa terjadi perubahan data sehingga UI nya harus dibangun ulang
+     ```sh
+     import 'package:flutter/foundation.dart';
+
+     class CartManager extends ChangeNotifier{}
+     ```
+5. ChangeNotifierProvider
+   - Widget yang membungkus sebuah class
+   - Mengimplementasikan ChangeNotifier dan menggunakan child untuk widget UI nya
+   - Menggunakan create, provider yang akan menyimpan model yang telah dibuat
+     ```sh
+     ChangeNotifierProvider(
+        create: (context) => MyModel(),
+        child: <widget>,
+     );
+     ```
+6. MultiProvider
+   - Jika kita membutuhkan lebih dari satu provider
+     ```sh
+     MultiProvider(
+        providers:[
+           Provider<MyModel>(create:(_) => Something()),
+           Provider<MyDatabase>(create: (_) => SomethingMore()),
+        ],
+        child: <widget>
+     );
+     ```
+7. Consumer
+   - Widget yang mendengarkan perubahan kelas yang mengimplementasikan ChangeNotifier
+   - Membangun ulang widget yang dibungkus Consumer saja
+   - Penting untuk meletakan Consumer pada lingkup sekecil mungkin
+   - Membutuhkan properti buulder yang berisi context, model, dan child
+     ```sh
+     Consumer<MyModel>(
+        builder: (context, model, child) {
+           return Text('Hello ${model.value}');
+        }
+     );
+     ```
+   - Anda akan mendapatkan keuntungan otomatisasi pembaruan widget ketika data berubah. Dengan kata lain, Consumer secara otomatis akan membangun ulang bagian dari widget tree yang bergantung pada data yang berubah, sehingga anda tidak perlu memanggil setState secara manual
+   - Namun, jika anda ingin memaksimalkan kemudahan pengembangan, otomatisasi, dan menghindari kesalahan dalam manejemen pembaruan widget, maka menggunakan Consumer adalah pilihan yang lebih efektif. Dengan Consumer, anda hanya perlu mendefinisikan bagian dari widget tree yang harus diperbarui saat data berubah, sehingga mengurangi risiko kesalahan manusia dalam pembaruan widget.
+  
+8. Provider.of
+   - Penggunaan Provider.of dapat menjadi lebih efektif dalam beberapa situasi di mana anda ingin mengontrol pembaruan widget secara manual atau jika struktur widget tree anda sederhana. Misalnya, anda ingin mengakses data sekali pada tahap awal pembangunan widget tree atau jika anda memiliki widget yang tidak perlu diperbarui saat data berubah.
