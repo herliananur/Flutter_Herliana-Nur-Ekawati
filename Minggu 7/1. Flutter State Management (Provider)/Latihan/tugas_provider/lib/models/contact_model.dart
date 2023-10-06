@@ -1,6 +1,6 @@
 class ContactModel {
-  final String name;
-  final String number;
+  String name;
+  String number;
   String title;
   String subtitle;
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tugas_provider/models/contact_manager.dart';
+import 'package:tugas_provider/provider/button_provider.dart';
+import 'package:tugas_provider/provider/number_provider.dart';
+// import 'package:tugas_provider/models/contact_manager.dart';
+import 'package:tugas_provider/provider/username_provider.dart';
 import 'package:tugas_provider/screens/contact_screen/widget/header_contact.dart';
 import 'package:tugas_provider/theme/theme_color.dart';
 import 'package:tugas_provider/theme/theme_text_style.dart';
@@ -17,7 +20,15 @@ class ContactPage extends StatefulWidget {
 class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
-    final contactManager = Provider.of<ContactManager>(context);
+    final usernameProvider = Provider.of<UsernameProvider>(context);
+    final numberProvider = Provider.of<NumberProvider>(context);
+    final buttonProvider = Provider.of<ButtonProvider>(context);
+    //
+    void _clearFields() {
+      usernameProvider.nameController.clear();
+      numberProvider.numberController.clear();
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -35,22 +46,20 @@ class _ContactPageState extends State<ContactPage> {
           TextFieldWidget(
             label: 'Name',
             hintText: 'Insert Your Name',
-            controller: contactManager.nameController,
-            errorText: contactManager.messageErrorNameValue,
+            controller: usernameProvider.nameController,
+            errorText: usernameProvider.messageErrorNameValue,
             onChanged: (val) {
-              contactManager.nameOnChanged(val);
-              setState(() {});
+              usernameProvider.nameOnChanged(val);
             },
           ),
           TextFieldWidget(
             label: 'Nomor',
             hintText: '+62...',
-            controller: contactManager.numberController,
-            errorText: contactManager.messageErrorNumberValue,
+            controller: numberProvider.numberController,
+            errorText: numberProvider.messageErrorNumberValue,
             textInputType: TextInputType.phone,
             onChanged: (val) {
-              contactManager.numberOnChanged(val);
-              setState(() {});
+              numberProvider.numberOnChanged(val);
             },
           ),
           Padding(
@@ -60,18 +69,24 @@ class _ContactPageState extends State<ContactPage> {
               children: [
                 ButtonWidget(
                   title: 'Submit',
-                  onPressed: (contactManager.messageErrorNameValue == null &&
-                          contactManager.messageErrorNumberValue == null &&
-                          contactManager.nameController.text.isNotEmpty &&
-                          contactManager.numberController.text.isNotEmpty)
+                  onPressed: (usernameProvider.messageErrorNameValue == null &&
+                          numberProvider.messageErrorNumberValue == null &&
+                          usernameProvider.nameController.text.isNotEmpty &&
+                          numberProvider.numberController.text.isNotEmpty)
                       ? () {
-                          if (contactManager.selectIndexContact == -1) {
-                            contactManager.addContact();
+                          if (buttonProvider.selectIndexContact == -1) {
+                            buttonProvider.addContact(
+                              name: usernameProvider.nameValue,
+                              number: numberProvider.numberValue,
+                            );
                           } else {
-                            contactManager.updateContact(
-                                contactManager.selectIndexContact);
+                            buttonProvider.updateContact(
+                                buttonProvider.selectIndexContact,
+                                name: usernameProvider.nameValue,
+                                number: numberProvider.numberValue);
                           }
-                          setState(() {});
+                          //
+                          _clearFields();
                         }
                       : null,
                 ),
@@ -99,9 +114,9 @@ class _ContactPageState extends State<ContactPage> {
             ),
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: contactManager.contactModel.length,
+              itemCount: buttonProvider.contactModel.length,
               itemBuilder: (context, index) {
-                var data = contactManager.contactModel[index];
+                var data = buttonProvider.contactModel[index];
                 return ListTile(
                   leading: CircleAvatar(
                     backgroundColor: ThemeColor().m3SysLightPrimaryContainer,
@@ -118,17 +133,15 @@ class _ContactPageState extends State<ContactPage> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          contactManager.nameController.text = data.name;
-                          contactManager.numberController.text = data.number;
-                          contactManager.selectIndexContact = index;
-                          setState(() {});
+                          usernameProvider.nameController.text = data.name;
+                          numberProvider.numberController.text = data.number;
+                          buttonProvider.selectIndexContact = index;
                         },
                         icon: const Icon(Icons.edit),
                       ),
                       IconButton(
                         onPressed: () {
-                          contactManager.removeContact(index);
-                          setState(() {});
+                          buttonProvider.removeContact(index);
                         },
                         icon: const Icon(Icons.delete),
                       ),

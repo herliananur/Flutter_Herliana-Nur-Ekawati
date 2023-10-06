@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tugas_provider/provider/button_provider.dart';
+import 'package:tugas_provider/provider/number_provider.dart';
+import 'package:tugas_provider/provider/username_provider.dart';
 import 'package:tugas_provider/screens/gallery_screen.dart';
 import 'package:tugas_provider/screens/contact_screen.dart';
-import 'package:tugas_provider/models/contact_manager.dart' as contact_store;
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<contact_store.ContactManager>(
-          create: (_) => contact_store.ContactManager(),
-        ),
+        ChangeNotifierProvider(create: (_) => UsernameProvider()),
+        ChangeNotifierProvider(create: (_) => NumberProvider()),
+        ChangeNotifierProvider(create: (_) => ButtonProvider()),
       ],
       child: const MyApp(),
     ),
