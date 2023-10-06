@@ -11,6 +11,7 @@ class UsernameProvider with ChangeNotifier {
   TextEditingController get nameController => _nameController;
 
   bool isFormValid = false;
+  
   void nameOnChanged(String value) {
     _nameValue = value;
     if (_nameValue.isEmpty) {

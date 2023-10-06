@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas_provider/provider/button_provider.dart';
 import 'package:tugas_provider/provider/number_provider.dart';
-// import 'package:tugas_provider/models/contact_manager.dart';
 import 'package:tugas_provider/provider/username_provider.dart';
 import 'package:tugas_provider/screens/contact_screen/widget/header_contact.dart';
 import 'package:tugas_provider/theme/theme_color.dart';
@@ -68,28 +67,28 @@ class _ContactPageState extends State<ContactPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ButtonWidget(
-                  title: 'Submit',
-                  onPressed: (usernameProvider.messageErrorNameValue == null &&
+                    title: 'Submit',
+                    onPressed: () {
+                      if (usernameProvider.messageErrorNameValue == null &&
                           numberProvider.messageErrorNumberValue == null &&
                           usernameProvider.nameController.text.isNotEmpty &&
-                          numberProvider.numberController.text.isNotEmpty)
-                      ? () {
-                          if (buttonProvider.selectIndexContact == -1) {
-                            buttonProvider.addContact(
-                              name: usernameProvider.nameValue,
-                              number: numberProvider.numberValue,
-                            );
-                          } else {
-                            buttonProvider.updateContact(
-                                buttonProvider.selectIndexContact,
-                                name: usernameProvider.nameValue,
-                                number: numberProvider.numberValue);
-                          }
-                          //
-                          _clearFields();
+                          numberProvider.numberController.text.isNotEmpty) {
+                        if (buttonProvider.selectIndexContact == -1) {
+                          buttonProvider.addContact(
+                            name: usernameProvider.nameValue,
+                            number: numberProvider.numberValue,
+                          );
+                        } else {
+                          buttonProvider.updateContact(
+                            buttonProvider.selectIndexContact,
+                            name: usernameProvider.nameValue,
+                            number: numberProvider.numberValue,
+                          );
+                          buttonProvider.selectIndexContact = -1;
                         }
-                      : null,
-                ),
+                        _clearFields();
+                      }
+                    })
               ],
             ),
           ),
@@ -133,9 +132,9 @@ class _ContactPageState extends State<ContactPage> {
                     children: [
                       IconButton(
                         onPressed: () {
+                          buttonProvider.selectIndexContact = index;
                           usernameProvider.nameController.text = data.name;
                           numberProvider.numberController.text = data.number;
-                          buttonProvider.selectIndexContact = index;
                         },
                         icon: const Icon(Icons.edit),
                       ),

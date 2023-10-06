@@ -16,7 +16,6 @@ class ButtonProvider with ChangeNotifier {
           title: 'Contacts${contactModel.length + 1}',
           subtitle: 'Contacts'),
     );
-    // resetField();
     notifyListeners();
   }
 
@@ -27,18 +26,10 @@ class ButtonProvider with ChangeNotifier {
 
   void updateContact(int index,
       {required String name, required String number}) {
-    _contactModel[index].name = name;
-    _contactModel[index].number = number;
-    notifyListeners();
+    if (index >= 0 && index < _contactModel.length) {
+      _contactModel[index].name = name;
+      _contactModel[index].number = number;
+      notifyListeners();
+    }
   }
-
-  // void updateNameContact(int index, String name) {
-  //   _contactModel.removeAt(index).name = name;
-  //   notifyListeners();
-  // }
-
-  // void updateNumberContact(int index, String number) {
-  //   _contactModel.removeAt(index).number = number;
-  //   notifyListeners();
-  // }
 }
