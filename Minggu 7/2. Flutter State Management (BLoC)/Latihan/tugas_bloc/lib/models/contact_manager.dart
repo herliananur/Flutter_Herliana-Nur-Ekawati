@@ -13,32 +13,30 @@ class ContactManager extends ChangeNotifier {
 
   bool isFormValid = false;
 
+  ContactModel? selectedContact;
   int selectIndexContact = -1;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
 
   void nameOnChanged(String value) {
-    _nameValue = value;
-    if (_nameValue.isEmpty) {
-      messageErrorNameValue = 'Nama tidak boleh kosong';
-    } else if (_nameValue.split(' ').length < 2) {
-      messageErrorNameValue = 'Nama harus terdiri dari minimal 2 kata';
-    } else if (!_nameValue
-        .split(' ')
-        .every((word) => word[0].toUpperCase() == word[0])) {
-      messageErrorNameValue = 'Setiap kata harus dimulai dengan huruf kapital';
-    } else if (_nameValue
-        .contains(RegExp(r'[0-9!@#\$%^&*()_+{}\[\]:;<>,.?~\\\/\-]'))) {
-      messageErrorNameValue =
-          'Nama tidak boleh mengandung angka atau karakter khusus';
-    } else {
-      messageErrorNameValue = null;
-    }
-    isFormValid =
-        messageErrorNameValue == null && messageErrorNumberValue == null;
-    notifyListeners();
+  _nameValue = value;
+  if (_nameValue.isEmpty) {
+    messageErrorNameValue = 'Nama tidak boleh kosong';
+  } else if (_nameValue.split(' ').length <2) {
+    messageErrorNameValue = 'Nama harus terdiri dari minimal 2 kata';
+  } else if (_nameValue
+      .contains(RegExp(r'[0-9!@#\$%^&*()_+{}\[\]:;<>,.?~\\\/\-]'))) {
+    messageErrorNameValue =
+        'Nama tidak boleh mengandung angka atau karakter khusus';
+  } else {
+    messageErrorNameValue = null;
   }
+  isFormValid =
+      messageErrorNameValue == null && messageErrorNumberValue == null;
+  notifyListeners();
+}
+
 
   void numberOnChanged(String value) {
     _numberValue = value;

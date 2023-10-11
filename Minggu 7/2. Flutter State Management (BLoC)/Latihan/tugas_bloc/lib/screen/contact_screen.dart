@@ -14,7 +14,7 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
-  final ContactManager contactManager = ContactManager();
+  // final ContactManager contactManager = ContactManager();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,6 @@ class _ContactPageState extends State<ContactPage> {
         ),
         centerTitle: true,
       ),
-      //
       drawer: buildDrawer(context),
       body: ListView(
         children: [
@@ -65,7 +64,7 @@ class _ContactPageState extends State<ContactPage> {
                           contactManager.nameController.text.isNotEmpty &&
                           contactManager.numberController.text.isNotEmpty)
                       ? () {
-                          if (contactManager.selectIndexContact == -1) {
+                          if (contactManager.selectedContact == null) {
                             contactManager.addContact();
                           } else {
                             contactManager.updateContact(
@@ -120,7 +119,7 @@ class _ContactPageState extends State<ContactPage> {
                         onPressed: () {
                           contactManager.nameController.text = data.name;
                           contactManager.numberController.text = data.number;
-                          contactManager.selectIndexContact = index;
+                          contactManager.selectedContact = data;
                           setState(() {});
                         },
                         icon: const Icon(Icons.edit),

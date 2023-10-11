@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:tugas_bloc/models/contact_model.dart';
 
-// part of 'contact_bloc.dart';
-
 abstract class ContactEvent extends Equatable {
   const ContactEvent();
 
@@ -11,18 +9,18 @@ abstract class ContactEvent extends Equatable {
 }
 
 class AddContactEvent extends ContactEvent {
-  final ContactModel contact;
+  final ContactModel newContact;
 
-  const AddContactEvent(this.contact);
+  const AddContactEvent(this.newContact);
 
   @override
-  List<Object> get props => [contact];
+  List<Object> get props => [newContact];
 }
 
-class RemoveContactEvent extends ContactEvent {
+class DeleteContactEvent extends ContactEvent {
   final int index;
 
-  const RemoveContactEvent(this.index);
+  const DeleteContactEvent(this.index);
 
   @override
   List<Object> get props => [index];
@@ -30,10 +28,10 @@ class RemoveContactEvent extends ContactEvent {
 
 class UpdateContactEvent extends ContactEvent {
   final int index;
-  final ContactModel contact;
+  final ContactModel editedContact;
 
-  const UpdateContactEvent(this.index, this.contact);
+  const UpdateContactEvent(this.index, this.editedContact);
 
   @override
-  List<Object> get props => [index, contact];
+  List<Object> get props => [index, editedContact];
 }
