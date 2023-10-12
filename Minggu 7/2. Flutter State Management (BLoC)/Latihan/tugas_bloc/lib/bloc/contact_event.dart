@@ -17,6 +17,16 @@ class AddContactEvent extends ContactEvent {
   List<Object> get props => [newContact];
 }
 
+class EditContactEvent extends ContactEvent {
+  final int index;
+  final ContactModel editedContact;
+
+  const EditContactEvent(this.index, this.editedContact);
+
+  @override
+  List<Object> get props => [index, editedContact];
+}
+
 class DeleteContactEvent extends ContactEvent {
   final int index;
 
@@ -26,12 +36,21 @@ class DeleteContactEvent extends ContactEvent {
   List<Object> get props => [index];
 }
 
-class UpdateContactEvent extends ContactEvent {
-  final int index;
-  final ContactModel editedContact;
+// class UpdateContactEvent extends ContactEvent {
+//   final int index;
+//   final ContactModel editedContact;
 
-  const UpdateContactEvent(this.index, this.editedContact);
+//   const UpdateContactEvent(this.index, this.editedContact);
+
+//   @override
+//   List<Object> get props => [index, editedContact];
+// }
+
+class UpdateContactEvent extends ContactEvent {
+  final List<ContactModel> updatedContacts;
+
+  const UpdateContactEvent(this.updatedContacts);
 
   @override
-  List<Object> get props => [index, editedContact];
+  List<Object> get props => [updatedContacts];
 }

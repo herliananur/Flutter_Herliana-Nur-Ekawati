@@ -5,22 +5,26 @@ import 'package:tugas_bloc/models/contact_model.dart';
 class ContactBloc extends Bloc<ContactEvent, List<ContactModel>> {
   ContactBloc() : super([]) {
     on<AddContactEvent>((event, emit) {
-      final updatedContact = [...state, event.newContact];
-      emit(updatedContact);
+      final updatedContacts = [...state, event.newContact];
+      emit(updatedContacts);
     });
 
+    // on<EditContactEvent>((event, emit) {
+    //   final updatedContacts = [...state];
+    //   updatedContacts[event.index] = event.editedContact;
+    //   emit(updatedContacts);
+    // });
+
     on<UpdateContactEvent>((event, emit) {
-      final updatedContact = [...state];
-      if (event.index >= 0 && event.index < updatedContact.length) {
-        updatedContact[event.index] = event.editedContact;
-        emit(updatedContact);
-      }
+      // final updatedContacts = [...state];
+      // updatedContacts[event.index] = event.editedContact;
+      emit(event.updatedContacts);
     });
 
     on<DeleteContactEvent>((event, emit) {
-      final updatedContact = [...state];
-      updatedContact.removeAt(event.index);
-      emit(updatedContact);
+      final updatedContacts = [...state];
+      updatedContacts.removeAt(event.index);
+      emit(updatedContacts);
     });
   }
 }

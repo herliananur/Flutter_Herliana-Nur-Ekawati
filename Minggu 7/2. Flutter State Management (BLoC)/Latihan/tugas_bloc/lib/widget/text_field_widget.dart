@@ -9,6 +9,7 @@ class TextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final String? errorText;
+  final String? Function(String?)? validator;
   const TextFieldWidget(
       {super.key,
       required this.label,
@@ -16,7 +17,8 @@ class TextFieldWidget extends StatelessWidget {
       required this.onChanged,
       this.controller,
       this.textInputType,
-      this.errorText});
+      this.errorText,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class TextFieldWidget extends StatelessWidget {
           floatingLabelBehavior: FloatingLabelBehavior.always,
         ),
         onChanged: onChanged,
+        validator: validator,
       ),
     );
   }
