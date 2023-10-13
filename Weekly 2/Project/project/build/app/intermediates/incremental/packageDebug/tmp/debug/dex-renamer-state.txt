@@ -1,0 +1,4 @@
+#Fri Oct 13 23:46:40 WITA 2023
+base.0=E\:\\ALTERRA ACADEMY\\GitHub\\Flutter_Herliana-Nur-Ekawati\\Weekly 2\\Project\\project\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
