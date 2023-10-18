@@ -1,4 +1,5 @@
 # Resume Materi UI Testing
+Beberapa point penting pada materi UI Testing sebagai berikut
 
 ## UI Testing
 1. Pengertian UI Testing
