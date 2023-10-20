@@ -1,0 +1,10 @@
+Tweet Classifier (Sentiment analysis)
+
+USER 1: Aku suka mendengarkan lagu!
+USER 2: Aku sangat suka menonton film
+USER 3: Aku mengerjakan tugas dan bermain
+USER 4: Aku tidak suka kebohongan
+
+ASSISTANT: positive
+
+Dari respon yang diberikan oleh assistant, dapat disimpulkan bahwa tweet dari USER 1-5 mengarah ke positif, karena mengandung unsur kata "Suka" dan makna tidak suka bohong itu berarti positif.
